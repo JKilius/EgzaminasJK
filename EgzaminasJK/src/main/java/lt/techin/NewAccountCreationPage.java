@@ -26,7 +26,7 @@ public class NewAccountCreationPage extends BasePage{
     @FindBy(xpath = "//span[@id='username.errors']")
     WebElement messageBadUserName;
 
-    @FindBy(xpath = "//span[@id=' password.errors']")
+    @FindBy(xpath = "//span[@id='password.errors']")
     WebElement messageBadPassword;
 
     @FindBy(xpath = "//span[@id='passwordConfirm.errors']")
@@ -35,7 +35,7 @@ public class NewAccountCreationPage extends BasePage{
     @FindBy(xpath = "//span[@id='username.errors']")
     WebElement messageUserAlreadyExists;
 
-    @FindBy(xpath = "//div[@class='form-group has-error']")
+    @FindBy(xpath = "//div[@class='form-group has-error']/span[contains(text(), '')]")
     List<WebElement> errorMessages;
 
     public NewAccountCreationPage(WebDriver driver) {
@@ -80,6 +80,10 @@ public class NewAccountCreationPage extends BasePage{
 
     public boolean isErrorMessageCorrect(String errorMessage){
         return errorMessages.stream().map(WebElement::getText).toList().contains(errorMessage);
+    }
+
+    public List<String> getError(){
+        return errorMessages.stream().map(WebElement::getText).toList();
     }
 
 }

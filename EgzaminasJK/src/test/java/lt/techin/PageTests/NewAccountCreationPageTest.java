@@ -105,7 +105,7 @@ public class NewAccountCreationPageTest extends BasePageTest {
 
     @ParameterizedTest
     @CsvFileSource(files = "src/main/resources/logins.csv", numLinesToSkip = 1)
-    void ussuccessfulLoginUsingIncorrectLoginData(String name, String password, String confirmPass, String errorMessage){
+    void unsuccessfulLoginUsingIncorrectLoginData(String name, String password, String confirmPass, String errorMessage){
         logInPage = new LogInPage(driver);
         newAccountCreationPage = new NewAccountCreationPage(driver);
 
@@ -115,6 +115,8 @@ public class NewAccountCreationPageTest extends BasePageTest {
         newAccountCreationPage.inputPasswordConfirm(confirmPass);
         newAccountCreationPage.clickButtonCreateAccount();
 
-        assertTrue(newAccountCreationPage.isErrorMessageCorrect(errorMessage), "Expected error message was not found: " + errorMessage);
+     //   System.out.println(newAccountCreationPage.getError());
+
+       assertTrue(newAccountCreationPage.isErrorMessageCorrect(errorMessage), "Expected error message was not found: " + errorMessage);
     }
 }
