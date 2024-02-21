@@ -5,6 +5,8 @@ import lt.techin.BasePage;
 import lt.techin.LogInPage;
 import lt.techin.NewAccountCreationPage;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -21,13 +23,13 @@ public class NewAccountCreationPageTest extends BasePageTest {
         newAccountCreationPage = new NewAccountCreationPage(driver);
         accountPage = new AccountPage(driver);
 
-        String newUserName = "testuotojas1";
-        String newUserPassword = "testuotojas1";
+        String newUserName = "testuotojas1++";
+        String newUserPassword = "testuotojas1++";
         String confirmPassword = newUserPassword;
 
         logInPage.clickLinkCreateNewAccount();
 
-        assertEquals("Naujos paskyros sukūrimas", logInPage.getPageName());
+        assertEquals("Naujos paskyros sukūrimas", newAccountCreationPage.getPageName());
 
         newAccountCreationPage.inputNewUserName(newUserName);
         newAccountCreationPage.inputNewPassword(newUserPassword);
@@ -79,5 +81,40 @@ public class NewAccountCreationPageTest extends BasePageTest {
 
 
         assertTrue(newAccountCreationPage.isErrorMessageBadConfirmPassword());
+    }
+
+    @Test
+    void unsuccessfulAccountCreationSameCredentials(){
+        logInPage = new LogInPage(driver);
+        newAccountCreationPage = new NewAccountCreationPage(driver);
+
+        String newUserName = "testas1";
+        String newUserPassword = "testas1";
+        String confirmPassword = newUserPassword;
+
+        logInPage.clickLinkCreateNewAccount();
+
+        newAccountCreationPage.inputNewUserName(newUserName);
+        newAccountCreationPage.inputNewPassword(newUserPassword);
+        newAccountCreationPage.inputPasswordConfirm(confirmPassword);
+        newAccountCreationPage.clickButtonCreateAccount();
+
+
+        assertTrue(newAccountCreationPage.isErrorMessageUserAlreadyExists());
+    }
+
+    @ParameterizedTest
+    @CsvFileSource(files = "src/main/resources/logins.csv", numLinesToSkip = 1)
+    void ussuccessfulLoginUsingIncorrectLoginData(String name, String password, String confirmPass, String errorMessage){
+        logInPage = new LogInPage(driver);
+        newAccountCreationPage = new NewAccountCreationPage(driver);
+
+        logInPage.clickLinkCreateNewAccount();
+        newAccountCreationPage.inputNewUserName(name);
+        newAccountCreationPage.inputNewPassword(password);
+        newAccountCreationPage.inputPasswordConfirm(confirmPass);
+        newAccountCreationPage.clickButtonCreateAccount();
+
+        assertTrue(newAccountCreationPage.isErrorMessageCorrect(errorMessage), "Expected error message was not found: " + errorMessage);
     }
 }

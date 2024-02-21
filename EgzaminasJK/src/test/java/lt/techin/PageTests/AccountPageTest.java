@@ -19,8 +19,8 @@ public class AccountPageTest extends BasePageTest{
         String userName = "testas1";
         String userPassword = "testas1";
 
-        logInPage.setInputUserName(userName);
-        logInPage.setInputPassword(userPassword);
+        logInPage.inputUserName(userName);
+        logInPage.inputPassword(userPassword);
         logInPage.clickButtonLogIn();
 
         assertTrue(accountPage.isThereLogOutAction());

@@ -30,7 +30,7 @@ public class LogInPage extends BasePage{
     @FindBy(xpath = "//span[contains(text(), 'Sėkmingai atsijungėte')]")
     WebElement messageSuccessfulLogOut;
 
-    @FindBy(xpath = "//span[contains(text(), 'Įvestas prisijungimo vardas ir/ arba slaptažodis yra neteisingi')]")
+    @FindBy(xpath = "//form/div/span[2]")
     WebElement messageUnsuccessfulLogIn;
 
     public LogInPage(WebDriver driver) {
@@ -41,11 +41,11 @@ public class LogInPage extends BasePage{
        return textPageName.getText();
     }
 
-    public void setInputUserName(String userName){
+    public void inputUserName(String userName){
         inputUserName.sendKeys(userName);
     }
 
-    public void setInputPassword(String userPassword){
+    public void inputPassword(String userPassword){
         inputPassword.sendKeys(userPassword);
     }
 

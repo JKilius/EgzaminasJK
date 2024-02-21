@@ -8,7 +8,7 @@ import org.junit.platform.suite.api.Suite;
 public class LogOutTest {
 
     @Suite
-    @SelectClasses({BasePageTest.class, AccountPageTest.class})
+    @SelectClasses({AccountPageTest.class})
     public static class logOutTest{
 
     }

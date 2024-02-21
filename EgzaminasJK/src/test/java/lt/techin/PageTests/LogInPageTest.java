@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class LogInPageTest extends BasePageTest{
 
-    LogInPage mainPage;
+    LogInPage logInPage;
 
     AccountPage accountPage;
 
@@ -15,15 +15,15 @@ public class LogInPageTest extends BasePageTest{
 
     @Test
     void successfullLoginToAccount(){
-        mainPage = new LogInPage(driver);
+        logInPage = new LogInPage(driver);
         accountPage = new AccountPage(driver);
 
         String userName = "testas1";
         String userPassword = "testas1";
 
-        mainPage.setInputUserName(userName);
-        mainPage.setInputPassword(userPassword);
-        mainPage.clickButtonLogIn();
+        logInPage.inputUserName(userName);
+        logInPage.inputPassword(userPassword);
+        logInPage.clickButtonLogIn();
 
         assertTrue(accountPage.isThereLogOutAction());
         assertTrue(accountPage.isUserNameCorrect(userName));
@@ -33,19 +33,19 @@ public class LogInPageTest extends BasePageTest{
 
     @Test
     void unsuccessfulLoginToAccount(){
-        mainPage = new LogInPage(driver);
+        logInPage = new LogInPage(driver);
         accountPage = new AccountPage(driver);
 
         String userName = "testas123";
         String userPassword = "testas123";
-        String message = mainPage.getMessageUnsuccessfulLogIn();
+        String message = "Įvestas prisijungimo vardas ir/ arba slaptažodis yra neteisingi";
 
-        mainPage.setInputUserName(userName);
-        mainPage.setInputPassword(userPassword);
-        mainPage.clickButtonLogIn();
+        logInPage.inputUserName(userName);
+        logInPage.inputPassword(userPassword);
+        logInPage.clickButtonLogIn();
 
-        assertTrue(mainPage.isThereUnsuccessfulLogInMessage());
-        assertEquals(message, mainPage.getMessageUnsuccessfulLogIn(), "Incorrect message. Should be: " + message);
+        assertTrue(logInPage.isThereUnsuccessfulLogInMessage());
+        assertEquals(message, logInPage.getMessageUnsuccessfulLogIn(), "Incorrect message. Should be: " + message);
 
     }
 }

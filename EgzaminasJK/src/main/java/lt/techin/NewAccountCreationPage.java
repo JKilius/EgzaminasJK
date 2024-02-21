@@ -4,6 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.List;
+
 public class NewAccountCreationPage extends BasePage{
 
     @FindBy(xpath = "//form/h2[contains(text(), 'Naujos paskyros sukūrimas')]")
@@ -29,6 +31,12 @@ public class NewAccountCreationPage extends BasePage{
 
     @FindBy(xpath = "//span[@id='passwordConfirm.errors']")
     WebElement messageBadConfirmPassword;
+
+    @FindBy(xpath = "//span[@id='username.errors']")
+    WebElement messageUserAlreadyExists;
+
+    @FindBy(xpath = "//div[@class='form-group has-error']")
+    List<WebElement> errorMessages;
 
     public NewAccountCreationPage(WebDriver driver) {
         super(driver);
@@ -64,6 +72,14 @@ public class NewAccountCreationPage extends BasePage{
 
     public boolean isErrorMessageBadConfirmPassword(){
         return messageBadConfirmPassword.isDisplayed();
+    }
+
+    public boolean isErrorMessageUserAlreadyExists(){
+        return messageUserAlreadyExists.isDisplayed();
+    }
+
+    public boolean isErrorMessageCorrect(String errorMessage){
+        return errorMessages.stream().map(WebElement::getText).toList().contains(errorMessage);
     }
 
 }

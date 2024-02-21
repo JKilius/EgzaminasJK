@@ -1,0 +1,6 @@
+name, password, confirm, errorMessage
+"", testas1, testas1, Šį laukelį būtina užpildyti Privaloma įvesti nuo 3 iki 32 simbolių
+1, testas1, testas1, Privaloma įvesti nuo 3 iki 32 simbolių
+testas11, testas1, "", Įvesti slaptažodžiai nesutampa
+testas11, t, t, Privaloma įvesti bent 3 simbolius
+testas11, "", testas1, Šį laukelį būtina užpildyti Privaloma įvesti bent 3 simbolius Įvesti slaptažodžiai nesutampa

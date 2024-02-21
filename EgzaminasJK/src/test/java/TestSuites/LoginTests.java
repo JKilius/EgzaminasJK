@@ -8,7 +8,7 @@ import org.junit.platform.suite.api.Suite;
 public class LoginTests {
 
     @Suite
-    @SelectClasses({BasePageTest.class, LogInPageTest.class})
+    @SelectClasses({LogInPageTest.class})
     public static class loginTests{
 
     }
