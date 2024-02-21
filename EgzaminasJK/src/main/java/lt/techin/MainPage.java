@@ -9,10 +9,16 @@ public class MainPage extends BasePage{
     @FindBy(xpath = "//h1[@class = 'text-center']")
     WebElement textPageName;
 
-    @FindBy(xpath = "//input[name=  'username' ]")
+//    @FindBy(xpath = "//input[name= 'username']")
+//    WebElement inputUserName;
+
+    @FindBy(xpath = "/html//form[@action='/prisijungti']//input[@name='username']")
     WebElement inputUserName;
 
-    @FindBy(xpath = "//input[name=  'password' ]")
+//    @FindBy(xpath = "//input[name= 'password']")
+//    WebElement inputPassword;
+
+    @FindBy(xpath = "/html//form[@action='/prisijungti']//input[@name='password']")
     WebElement inputPassword;
 
     @FindBy(xpath = "//button[@type='submit']")
@@ -20,6 +26,9 @@ public class MainPage extends BasePage{
 
     @FindBy(xpath = "//a[@href='/registruoti']")
     WebElement linkCreateNewAccount;
+
+    @FindBy(xpath = "//span[contains(text(), 'Sėkmingai atsijungėte')]")
+    WebElement messageSuccessfulLogOut;
 
     public MainPage(WebDriver driver) {
         super(driver);
@@ -29,12 +38,12 @@ public class MainPage extends BasePage{
        return textPageName.getText();
     }
 
-    public void setInputUserName(){
-        inputUserName.sendKeys();
+    public void setInputUserName(String userName){
+        inputUserName.sendKeys(userName);
     }
 
-    public void setInputPassword(){
-        inputPassword.sendKeys();
+    public void setInputPassword(String userPassword){
+        inputPassword.sendKeys(userPassword);
     }
 
     public void clickButtonLogIn(){
@@ -43,5 +52,13 @@ public class MainPage extends BasePage{
 
     public void clickLinkCreateNewAccount(){
         linkCreateNewAccount.click();
+    }
+
+    public String getMessageOfSuccessfulLogOut(){
+        return messageSuccessfulLogOut.getText();
+    }
+
+    public boolean isLogOutMessageCorrect(){
+        return getMessageOfSuccessfulLogOut().contains("Sėkmingai atsijungėte");
     }
 }
