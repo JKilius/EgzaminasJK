@@ -1,14 +1,13 @@
 package lt.techin.PageTests;
 
 import lt.techin.AccountPage;
-import lt.techin.MainPage;
-import org.junit.jupiter.api.Assertions;
+import lt.techin.LogInPage;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class MainPageTest extends BasePageTest{
+public class LogInPageTest extends BasePageTest{
 
-    MainPage mainPage;
+    LogInPage mainPage;
 
     AccountPage accountPage;
 
@@ -16,7 +15,7 @@ public class MainPageTest extends BasePageTest{
 
     @Test
     void successfullLoginToAccount(){
-        mainPage = new MainPage(driver);
+        mainPage = new LogInPage(driver);
         accountPage = new AccountPage(driver);
 
         String userName = "testas1";
@@ -34,6 +33,19 @@ public class MainPageTest extends BasePageTest{
 
     @Test
     void unsuccessfulLoginToAccount(){
-        
+        mainPage = new LogInPage(driver);
+        accountPage = new AccountPage(driver);
+
+        String userName = "testas123";
+        String userPassword = "testas123";
+        String message = mainPage.getMessageUnsuccessfulLogIn();
+
+        mainPage.setInputUserName(userName);
+        mainPage.setInputPassword(userPassword);
+        mainPage.clickButtonLogIn();
+
+        assertTrue(mainPage.isThereUnsuccessfulLogInMessage());
+        assertEquals(message, mainPage.getMessageUnsuccessfulLogIn(), "Incorrect message. Should be: " + message);
+
     }
 }

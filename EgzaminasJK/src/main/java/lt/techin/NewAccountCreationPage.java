@@ -20,6 +20,16 @@ public class NewAccountCreationPage extends BasePage{
 
     @FindBy(xpath = "//button[@type='submit']")
     WebElement buttonCreateAccount;
+
+    @FindBy(xpath = "//span[@id='username.errors']")
+    WebElement messageBadUserName;
+
+    @FindBy(xpath = "//span[@id=' password.errors']")
+    WebElement messageBadPassword;
+
+    @FindBy(xpath = "//span[@id='passwordConfirm.errors']")
+    WebElement messageBadConfirmPassword;
+
     public NewAccountCreationPage(WebDriver driver) {
         super(driver);
     }
@@ -28,19 +38,32 @@ public class NewAccountCreationPage extends BasePage{
         return textPageName.getText();
     }
 
-    public void setInputNewUserName(String newUserName){
+    public void inputNewUserName(String newUserName){
         inputNewUserName.sendKeys(newUserName);
     }
 
-    public void setInputNewPassword(String newPassword){
+    public void inputNewPassword(String newPassword){
         inputNewPassword.sendKeys(newPassword);
     }
 
-    public void setInputPasswordConfirm(){
-        inputPasswordConfirm.sendKeys();
+    public void inputPasswordConfirm(String newPassword){
+        inputPasswordConfirm.sendKeys(newPassword);
     }
 
     public void clickButtonCreateAccount(){
         buttonCreateAccount.click();
     }
+
+    public boolean isErrorMessageBadUserName(){
+        return messageBadUserName.isDisplayed();
+    }
+
+    public boolean isErrorMessageBadPassword(){
+        return messageBadPassword.isDisplayed();
+    }
+
+    public boolean isErrorMessageBadConfirmPassword(){
+        return messageBadConfirmPassword.isDisplayed();
+    }
+
 }

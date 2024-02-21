@@ -4,9 +4,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class MainPage extends BasePage{
+public class LogInPage extends BasePage{
 
-    @FindBy(xpath = "//h1[@class = 'text-center']")
+    @FindBy(xpath = "//h3[@class='form-heading']")
     WebElement textPageName;
 
 //    @FindBy(xpath = "//input[name= 'username']")
@@ -30,7 +30,10 @@ public class MainPage extends BasePage{
     @FindBy(xpath = "//span[contains(text(), 'Sėkmingai atsijungėte')]")
     WebElement messageSuccessfulLogOut;
 
-    public MainPage(WebDriver driver) {
+    @FindBy(xpath = "//span[contains(text(), 'Įvestas prisijungimo vardas ir/ arba slaptažodis yra neteisingi')]")
+    WebElement messageUnsuccessfulLogIn;
+
+    public LogInPage(WebDriver driver) {
         super(driver);
     }
 
@@ -60,5 +63,13 @@ public class MainPage extends BasePage{
 
     public boolean isLogOutMessageCorrect(){
         return getMessageOfSuccessfulLogOut().contains("Sėkmingai atsijungėte");
+    }
+
+    public String getMessageUnsuccessfulLogIn(){
+        return messageUnsuccessfulLogIn.getText();
+    }
+
+    public boolean isThereUnsuccessfulLogInMessage(){
+        return messageUnsuccessfulLogIn.isDisplayed();
     }
 }
