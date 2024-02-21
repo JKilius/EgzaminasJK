@@ -23,8 +23,8 @@ public class NewAccountCreationPageTest extends BasePageTest {
         newAccountCreationPage = new NewAccountCreationPage(driver);
         accountPage = new AccountPage(driver);
 
-        String newUserName = "testuotojas1++";
-        String newUserPassword = "testuotojas1++";
+        String newUserName = "testuotojas1+++";
+        String newUserPassword = "testuotojas1+++";
         String confirmPassword = newUserPassword;
 
         logInPage.clickLinkCreateNewAccount();

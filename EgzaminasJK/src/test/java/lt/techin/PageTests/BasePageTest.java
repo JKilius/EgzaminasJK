@@ -18,9 +18,9 @@ public class BasePageTest {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
     }
 
-//    @AfterEach
-//    void tearDown(){
-//        driver.quit();
-//    }
+    @AfterEach
+    void tearDown(){
+        driver.quit();
+    }
 
 }
