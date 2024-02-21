@@ -41,6 +41,27 @@ public class NewAccountCreationPageTest extends BasePageTest {
 
     }
 
+
+    @Test
+    void unsuccessfulAccountCreationNoInput(){
+        logInPage = new LogInPage(driver);
+        newAccountCreationPage = new NewAccountCreationPage(driver);
+
+        String newUserName = "";
+        String newUserPassword = "";
+        String confirmPassword = newUserPassword;
+
+        logInPage.clickLinkCreateNewAccount();
+
+        newAccountCreationPage.inputNewUserName(newUserName);
+        newAccountCreationPage.inputNewPassword(newUserPassword);
+        newAccountCreationPage.inputPasswordConfirm(confirmPassword);
+        newAccountCreationPage.clickButtonCreateAccount();
+
+
+        assertTrue(newAccountCreationPage.isErrorMessageBadUserName());
+        assertTrue(newAccountCreationPage.isErrorMessageBadPassword());
+    }
     @Test
     void unsuccessfulAccountCreationBadUserNameAndPassword(){
         logInPage = new LogInPage(driver);
